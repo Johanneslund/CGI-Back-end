@@ -18,12 +18,11 @@ namespace CGICodeTest.Controllers
     {
 
 
-        private readonly CardContext _context;
         private readonly ICardService _service;
 
-        public CardController(CardContext context, ICardService service)
+        public CardController( ICardService service)
         {
-            _context = context;
+          
             _service = service;
         }
 
@@ -63,7 +62,6 @@ namespace CGICodeTest.Controllers
         [EnableCors("AllowAll")]
         public async Task<OkResult> AddCard([FromBody] BusinessCard card)
         {
-            var test = card;
 
 
             try
@@ -71,7 +69,7 @@ namespace CGICodeTest.Controllers
                 await _service.AddAsync(card);
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -93,7 +91,7 @@ namespace CGICodeTest.Controllers
                 card.Id = id;
                 await _service.UpdateAsync(card);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;
